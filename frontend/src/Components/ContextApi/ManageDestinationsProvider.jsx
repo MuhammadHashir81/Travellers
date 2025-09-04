@@ -31,11 +31,7 @@ const ManageDestinationsProvider = ({ children }) => {
 
 
         const data = await response.json();
-        console.log(data)
         if (response.ok) {
-            console.log("Destination uploaded successfully:", data.destinations[0]);
-            console.log(data);
-            
             setAdminDestinations(data.destinations);
         } else {
             console.error("Error uploading destination:", data.error);

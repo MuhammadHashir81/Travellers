@@ -6,20 +6,17 @@ import { ManageDestinationContext } from '../ContextApi/ManageDestinationsProvid
 import { useEffect } from 'react';
 const Travelling = () => {
     const { getAllDestinations,adminDestinations } = useContext(ManageDestinationContext);
-    console.log("Destinations:", adminDestinations);
 
     
     
     const [value, setValue] = useState(0);
     const filteredDestinations = adminDestinations.filter(destination => destination.price <= value)
-    console.log("Filtered Destinations:", filteredDestinations);
 
 
     useEffect(() =>{
         // Fetch all destinations when the component mounts
         getAllDestinations()
 
-        console.log("Fetching all destinations...");
 
     },[])
     return (

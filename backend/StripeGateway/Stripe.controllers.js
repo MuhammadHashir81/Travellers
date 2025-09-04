@@ -1,6 +1,7 @@
 import Stripe from "stripe"
 import dotenv from "dotenv";
 import express from 'express'
+import { Order } from "../Model/Stripe.Schema.js";
 
 const app = express()
 
@@ -61,20 +62,35 @@ export const handlePostPayment = async (req, res) => {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object
+    console.log(session)
+    const sessionId = session.id
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 5 });
-    lineItems.data.forEach(item => {
-      item.description
-      item.quantity
-      item.price.unit_amount
+
+    const items = lineItems.data.map(item => {
+        item.description,
+        item.quantity,
+        item.amount_total
     });
+    console.log(items)
+
     const customerEmail = session.customer_details.email
     const customerName = session.customer_details.name
 
 
+    // const createUser = await Order.create({
+    //   sessionId:sessionId,
+    //   customerName:customerName,
+    //   customerEmail:customerEmail,
+    //   items,
+    //   totalAmount:session.amount_subtotal
 
-    console.log(' Checkout session completed:', customerEmail, customerName);
+    // })
+
+
+    res.status(200).send("createUser")
+    // console.log({createUser})
+
   }
 
-  res.sendStatus(200); // IMPORTANT
 };
 
