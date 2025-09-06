@@ -76,6 +76,9 @@ function App() {
 
     <div className=''>
 
+
+      {/* protected routes */}
+
       <Routes>
 
         <Route path='/' element={
@@ -95,6 +98,7 @@ function App() {
         
 
 
+            {/* admin route  */}
 
         <Route path='/admin-dashboard' element={
           <AdminPublicRoute>
@@ -107,7 +111,9 @@ function App() {
           <Route path='booked-destinations' element={<AdminBookings/>} />
 
         </Route>
+            
 
+            {/* pages for the logged in user */}
 
         <Route path='/home' element={
           <ProtectRoute>

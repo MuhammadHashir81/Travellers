@@ -1,10 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 
 const BookYourDestination = () => {
-
+ const navigate = useNavigate()
     return (
         <div >
             <div className='px-32 my-52 bg-green-100 py-10 flex' >
@@ -24,11 +25,9 @@ const BookYourDestination = () => {
                             <p className='font-primary'>Enjoy your journey with <span className='font-bold'> Travellers</span>. Through <span className='font-bold'> Travellers</span> 50,000 people have visited the world and many more to come you could the next traveller so if you want to refresh your life and experience a good journey go ahead and book your destination.</p>
                         </div>
 
-                            <NavLink to='/home/destinations'>
-                                <button className='mt-6 px-8 py-2.5 rounded-sm bg-green-500 text-white font-primary transition-all duration-200 hover:bg-green-600 cursor-pointer'>
+                                <button onClick={()=> {navigate('/home/destinations') ; scrollTo(0,0) } } className='mt-6 px-8 py-2.5 rounded-sm bg-green-500 text-white font-primary transition-all duration-200 hover:bg-green-600 cursor-pointer'>
                                     explore destinations
                                 </button>
-                            </NavLink>
                         </div>
 
                     </div>
