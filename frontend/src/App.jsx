@@ -18,6 +18,10 @@ import AdminDashboard from './Components/Pages/AdminDashboard'
 import AdminOverview from './Components/Pages/AdminOverview'
 import AdminLayout from './Components/Pages/AdminLayout'
 import AdminManageDestinations from './Components/Pages/AdminManageDestinations'
+import PaymentSuccess from './Components/PaymentSuccess'
+import PaymentError from './PaymentError'
+import AdminBookings from './Components/Pages/AdminBookings'
+import YourBooking from './Components/Pages/YourBooking'
 function App() {
 
   const isAuthenticated = () => {
@@ -100,6 +104,7 @@ function App() {
           <Route index element={<AdminOverview />} />
           <Route path='manage-destinations' element={<AdminManageDestinations />} />
           <Route path='upload-destinations' element={<UploadDestinations />} />
+          <Route path='booked-destinations' element={<AdminBookings/>} />
 
         </Route>
 
@@ -110,7 +115,10 @@ function App() {
           </ProtectRoute>}>
           <Route index element={<Home />} />
           <Route path='destinations' element={<Destinations />} />
+          <Route path='your-booking' element={<YourBooking />} />
         </Route>
+        <Route path='/payment-success' element={<PaymentSuccess/>}/>
+        <Route path='/payment-error' element={<PaymentError/>}/>
       </Routes>
 
     </div>

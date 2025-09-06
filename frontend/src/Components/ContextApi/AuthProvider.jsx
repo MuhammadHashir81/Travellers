@@ -121,6 +121,9 @@ const AuthProvider = ({ children }) => {
         if (response.ok) {
             localStorage.removeItem('userToken')
             toast.success(data.success)
+            
+                 window.location.reload()
+
         }
         else {
             toast.error(data.error)

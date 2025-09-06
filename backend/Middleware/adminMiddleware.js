@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken'
 
 
-export const verifyToken = (req, res, next) => {
+export const verifyAdmin = (req, res, next) => {
     const token = req.cookies?.adminJWT
+    console.log(token)
 
     if (!token) {
         res.status(400).json({ error: "Access denied please login first " })

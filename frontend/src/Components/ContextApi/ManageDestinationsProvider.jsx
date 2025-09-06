@@ -34,7 +34,7 @@ const ManageDestinationsProvider = ({ children }) => {
         if (response.ok) {
             setAdminDestinations(data.destinations);
         } else {
-            console.error("Error uploading destination:", data.error);
+            console.error("Error getting destination:", data.error);
         }
     }
 

@@ -10,6 +10,7 @@ import Fade from '@mui/material/Fade';
 import { useContext } from 'react';
 import { ManageDestinationContext } from '../ContextApi/ManageDestinationsProvider';
 
+
 const style = {
     position: 'absolute',
     top: '50%',

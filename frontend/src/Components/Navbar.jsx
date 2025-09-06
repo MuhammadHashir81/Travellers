@@ -13,13 +13,10 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/home' },
         { name: 'Destinations', path: '/home/destinations' },
-        { name: 'Contact', path: '/home/contact' },
-        { name: 'About', path: '/home/about' },
     ];
 
     const logOutUser = () => {
         handleLogOut();
-        window.location.reload();
     }
 
     const ref = React.useRef(null)
@@ -52,9 +49,9 @@ const Navbar = () => {
                             <div className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
                         </a>
                     ))}
-                    <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all font-primary`}>
+                    <NavLink to="/home/your-booking" className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all font-primary`}>
                         Your Booking
-                    </button>
+                    </NavLink>
 
                 </div>
 
@@ -100,9 +97,9 @@ const Navbar = () => {
                         </a>
                     ))}
 
-                    <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
+                    <NavLink to='/your-booking' className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all" >
                         Your Booking
-                    </button>
+                    </NavLink>
 
                     <button className="cursor-pointer bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500 ">
                         Login

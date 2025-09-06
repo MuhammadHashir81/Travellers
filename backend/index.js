@@ -8,6 +8,9 @@ import dotenv, { parse } from 'dotenv'
 import { adminRouter } from './Routes/admin.route.js'
 import { adminUploadRouter } from './Routes/admindestinationupload.route.js'
 import { stripeRouter } from './StripeGateway/Stripe.route.js'
+import { adminBookingRouter } from './Routes/adminBookings.route.js'
+import { yourBookingRouter } from './Routes/Adminorders.route.js'
+import { userBookingRouter } from './Routes/Userbooking.route.js'
 const app = express()
 const port = 3000
 
@@ -24,12 +27,12 @@ app.use(cors({
   credentials: true
 }))
 
+app.use(cookieParser())
 
 app.use('/payment',stripeRouter)
 
 
 app.use(express.json())
-app.use(cookieParser())
 
 app.use("/uploads", express.static("uploads"));
 
@@ -44,6 +47,9 @@ app.use('/api/auth', authRouter)
 app.use('/api/destination', adminUploadRouter)
 app.use('/api/destinations', getDestinationsRouter)
 app.use('/api/auth',adminRouter)
+app.use('/bookings',adminBookingRouter)
+app.use('/your',yourBookingRouter)
+app.use('/user',userBookingRouter)
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

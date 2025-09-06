@@ -12,6 +12,9 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import AdminProvider from './Components/ContextApi/AdminProvider.jsx';
 import StripeProvider from './Components/ContextApi/StripeGateway/StripeProvider.jsx';
 import ProtectedRoute from './Components/ContextApi/ProtectedRoute.jsx';
+import AdminBookingsProvider from './Components/ContextApi/AdminBookings/AdminBookingsProvider.jsx';
+import YourBookingProvider from './Components/ContextApi/YourBookingProvider.jsx';
+import UserBookingProvider from './Components/ContextApi/UserBookingProvider.jsx';
 
 const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 createRoot(document.getElementById('root')).render(
@@ -20,17 +23,21 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ProtectedRoute>
     <StripeProvider>
-
+      <AdminBookingsProvider>
+        <YourBookingProvider>
+          <UserBookingProvider>
     <GoogleOAuthProvider clientId={clientId} >
     <AuthProvider>
       <AdminProvider>
-
       <ManageDestinationsProvider>
     <App />
       </ManageDestinationsProvider>
       </AdminProvider>
     </AuthProvider>
     </GoogleOAuthProvider>
+          </UserBookingProvider>
+        </YourBookingProvider>
+      </AdminBookingsProvider>
     </StripeProvider>
     </ProtectedRoute>
     </BrowserRouter>

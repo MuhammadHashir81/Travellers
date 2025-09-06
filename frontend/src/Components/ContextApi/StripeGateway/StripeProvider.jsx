@@ -17,11 +17,12 @@ const StripeProvider = ({children}) => {
           method:'POST',
           headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            credentials:'include'
         })
 
         const data = await response.json()
-        console.log(data.url)
+        console.log(data)
         if (data.url) {
           window.location.href = data.url
           

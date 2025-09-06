@@ -4,6 +4,11 @@ const {Schema} = mongoose
 
 const orderSchema = new Schema({
 
+    id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
+
     sessionId : {
      type:String
     },
@@ -15,14 +20,12 @@ const orderSchema = new Schema({
     },
     items:[
         {
-            name:String,
-            quantity:Number,
+            description:String,
             price:Number
 
         }
 
     ],
-    totalAmount:Number
 
 
 })

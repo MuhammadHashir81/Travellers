@@ -7,6 +7,8 @@ import { MdLogout } from "react-icons/md";
 import { useContext } from 'react';
 import { AdminContext } from '../ContextApi/AdminProvider';
 import { Toaster } from 'react-hot-toast';
+import { TbBrandBooking } from "react-icons/tb";
+
 
 
 
@@ -21,7 +23,7 @@ const AdminDashboard = () => {
   return (
     <div>
       <Toaster/>
-      <h1 className=" px-2 text-5xl font-primary my-2">Travellers</h1>
+      <h1 className=" px-2 text-5xl font-primary my-2"> <NavLink to='/admin-dashboard'> Travellers </NavLink></h1>
       <Sidebar className=' '>
         <Menu className='min-h-screen py-4'>
 
@@ -54,6 +56,16 @@ const AdminDashboard = () => {
 
               <GoUpload />
               <span>Upload Destinations</span>
+            </div>
+          </MenuItem>
+
+            <MenuItem
+            component={<NavLink to="booked-destinations" />}
+          >
+            <div className="flex items-center space-x-1.5">
+
+              <TbBrandBooking />
+              <span>Bookings</span>
             </div>
           </MenuItem>
 

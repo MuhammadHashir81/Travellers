@@ -2,6 +2,7 @@ import Stripe from "stripe"
 import dotenv from "dotenv";
 import express from 'express'
 import { Order } from "../Model/Stripe.Schema.js";
+import { User } from "../Model/User.Schema.js";
 
 const app = express()
 
@@ -12,6 +13,16 @@ const YOUR_DOMAIN = 'http://localhost:5173'
 
 
 export const stripePayment = async (req, res) => {
+  const id = req.userId
+
+  const findUser = await User.findById(id)
+  const findUserEmail = findUser.email
+
+  if (!findUserEmail) {
+    res.status(404).json({ error: "some error occured" })
+
+  }
+
   const { price, destination } = req.params; // price from frontend
   try {
     const session = await stripe.checkout.sessions.create({
@@ -28,14 +39,20 @@ export const stripePayment = async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${YOUR_DOMAIN}/`,
-      cancel_url: `${YOUR_DOMAIN}/`,
+      customer_email: findUserEmail,
+      success_url: `${YOUR_DOMAIN}/payment-success`,
+      cancel_url: `${YOUR_DOMAIN}/payment-error`,
+
+      metadata: {
+        userId: id
+      }
     });
 
-    res.json({ url: session.url }); // send URL back to frontend
+    res.json({ url: session.url, session }); // send URL back to frontend
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
+    console.log(error.message)
   }
 };
 
@@ -54,41 +71,39 @@ export const handlePostPayment = async (req, res) => {
       process.env.STRIPE_WEBHOOK_ENDPOINT // make sure this is set correctly
     );
   } catch (err) {
-    console.log(`Webhook signature verification failed:`, err.message);
     return res.sendStatus(400);
   }
 
-  console.log(' Event received:', event.type);
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object
-    console.log(session)
+
+    // finding a specific user to relate his booked destinaitons 
+
+    const userId = session.metadata.userId
+
     const sessionId = session.id
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 5 });
-
     const items = lineItems.data.map(item => {
-        item.description,
-        item.quantity,
-        item.amount_total
+
+      return {
+        description: item.description,
+        price: item.price.unit_amount 
+      }
     });
-    console.log(items)
 
     const customerEmail = session.customer_details.email
     const customerName = session.customer_details.name
 
-
-    // const createUser = await Order.create({
-    //   sessionId:sessionId,
-    //   customerName:customerName,
-    //   customerEmail:customerEmail,
-    //   items,
-    //   totalAmount:session.amount_subtotal
-
-    // })
-
+    const createUser = await Order.create({
+      id:userId,
+      sessionId: sessionId,
+      customerName: customerName,
+      customerEmail: customerEmail,
+      items,
+    })
 
     res.status(200).send("createUser")
-    // console.log({createUser})
 
   }
 

@@ -30,9 +30,9 @@ const TravelCard = ({destination}) => {
 
                         {/* travel card  */}
                         <img src={`http://localhost:3000/uploads/${destination.image}`} alt="" className='w-[500px] h-[250px] object-cover rounded-xl' />
-                        <div>
+                        <div >
 
-                            <span className='bg-green-300/20 px-9 py-2 rounded-full text-green-600 '>{destination.destination}</span>
+                            <span className='w-fit bg-green-300/20 px-9 py-2 rounded-full text-green-600 '>{destination.destination}</span>
                             <div className='flex flex-wrap gap-2 mt-7 text-gray-600 font-primary items-center'>
                            {/* <p>{destination.services}</p> */}
 

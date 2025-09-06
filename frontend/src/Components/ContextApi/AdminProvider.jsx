@@ -66,9 +66,7 @@ const AdminProvider = ({ children }) => {
       console.log(data.success)
       toast.success(data.success)
       localStorage.removeItem('adminToken')
-      setTimeout(() => {
-         navigate('/')
-      }, 2000);
+         window.location.reload()
     }
   }
 

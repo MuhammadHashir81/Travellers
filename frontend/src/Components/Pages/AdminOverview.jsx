@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import AdminCard from './AdminCard'
 import { useContext } from 'react'
-// import { AdminContext } from '../ContextApi/AdminProvider'
+
 import { ManageDestinationContext } from '../ContextApi/ManageDestinationsProvider'
 const AdminOverview = () => {
     const {adminDestinations,setAdminDestinations,getAllDestinations} = useContext(ManageDestinationContext)

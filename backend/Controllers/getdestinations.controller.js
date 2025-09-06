@@ -1,5 +1,6 @@
 import { UploadDestinations } from '../Model/UploadDestination.Schema.js';
 export const getDestinations = async (req, res) => {
+
      try { 
         const destinations = await UploadDestinations.find();
         if (!destinations || destinations.length === 0) {
