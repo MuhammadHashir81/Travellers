@@ -60,7 +60,7 @@ const Navbar = () => {
 
                     {
                         token ?(
-                            <button onClick={logOutUser} className={`cursor-pointer px-8 py-2.5 rounded-full ml-4 transition-all duration-500 ${isScrolled ? "text-white bg-black" : "bg-red-500 text-white font-primary"}`}>
+                            <button onClick={logOutUser} className={`cursor-pointer px-8 py-2.5 rounded-md ml-4 transition-all duration-500 ${isScrolled ? "text-white bg-black" : "bg-red-500 text-white font-primary"}`}>
                                 Logout
                             </button>
                         )
