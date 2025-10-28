@@ -18,16 +18,16 @@ const BestDestinations = () => {
   }, []);
 
   return (
-    <div className='px-32 my-52' >
+    <div className='px-32 my-52 ' >
       <h2 className='text-5xl font-primary text-center text-gray-900 font-bold'>
         Your Next Destination
       </h2>
 
-      <div className='flex mt-20 flex-wrap gap-10 justify-center items-center'>
+      <div className='flex mt-20  flex-wrap gap-10 justify-center items-center'>
         {destinations.map((single, index) => (
           <div
             key={index}
-            className='rounded-md relative w-[500px] cursor-pointer hover:scale-105 transition-all duration-300'
+            className='rounded-md relative w-[400px] cursor-pointer hover:scale-105 transition-all duration-300'
                
           >
             <img src={single.image} alt={single.destination} className='rounded-md' />
